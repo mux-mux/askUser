@@ -1,13 +1,29 @@
 const numberOfFilms = +prompt("How many films did you watched already?", "");
-let askFilm, askRate;
+let askFilm, askRate, askGenere;
 
 const personalMovieDB = {
   count: numberOfFilms,
   movies: {},
   actors: {},
-  generes: [],
+  geners: [],
   private: false,
 }
+
+function showMyDB(isPrivate) {
+  if (isPrivate === false) {
+    console.log(personalMovieDB.movies);
+  }
+}
+showMyDB(personalMovieDB.private);
+
+function writeYourGeneres() {
+  for (let i = 0; i < 3; i++) {
+    askGenere = +prompt(`What is your best genere number ${i + 1}?`, "");
+    personalMovieDB.geners[i] = askGenere;
+  }
+}
+writeYourGeneres();
+console.log(personalMovieDB);
 
 for (let i = 0; i < 2; i++) {
   do {
