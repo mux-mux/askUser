@@ -1,55 +1,61 @@
-const numberOfFilms = +prompt("How many films did you watched already?", "");
-let askFilm, askRate, askGenere;
+let askFilm, askRate, askGenre, numberOfFilms;
 
 const personalMovieDB = {
   count: numberOfFilms,
   movies: {},
   actors: {},
-  geners: [],
+  genres: [],
   private: false,
 }
 
+
+function start() {
+  while (numberOfFilms === '' || numberOfFilms === null || isNaN(numberOfFilms)) {
+    numberOfFilms = +prompt("How many films did you watched already?", "");
+  }
+}
+start();
+
+
 function showMyDB(isPrivate) {
-  if (isPrivate === false) {
-    console.log(personalMovieDB.movies);
+  if (!isPrivate) {
+    console.log(personalMovieDB);
   }
 }
 showMyDB(personalMovieDB.private);
 
-function writeYourGeneres() {
+
+function writeYourGenres() {
   for (let i = 0; i < 3; i++) {
-    askGenere = +prompt(`What is your best genere number ${i + 1}?`, "");
-    personalMovieDB.geners[i] = askGenere;
+    personalMovieDB.genres[i] = +prompt(`What is your best genre number ${i + 1}?`, "");
   }
 }
-writeYourGeneres();
-console.log(personalMovieDB);
+writeYourGenres();
 
-for (let i = 0; i < 2; i++) {
-  do {
-    askFilm = prompt("Recently watched film?", "");
-    askRate = prompt("How will you rate it?", "");
-  } while (askFilm.length < 50 || ((askFilm === null || askRate === null) || (askFilm === '' || askRate === '')));
-  personalMovieDB.movies[askFilm] = askRate;
+
+function rememberMyFilms() {
+  for (let i = 0; i < 2; i++) {
+    do {
+      askFilm = prompt("Recently watched film?", "");
+      askRate = prompt("How will you rate it?", "");
+    } while (askFilm.length < 50 || ((askFilm === null || askRate === null) || (askFilm === '' || askRate === '')));
+    personalMovieDB.movies[askFilm] = askRate;
+  }
 }
+rememberMyFilms();
 
-// let j;
-// while (j < 2) {
-//   do {
-//     askFilm = prompt("Recently watched film?", "");
-//   } while (askFilm.length < 50 && (askFilm === undefined && askFilm === ''));
-//   askRate = +prompt("How will you rate it?", "");
-//   personalMovieDB.movies[askFilm] = askRate;
-//   j++;
-// }
 
-if (personalMovieDB.count < 10) {
-  console.log('More');
-} else if (personalMovieDB.count > 10 && personalMovieDB.count < 30) {
-  console.log('Good');
-} else if (personalMovieDB.count < 30) {
-  console.log('Expert');
-} else {
-  console.log('Error');
+function detectPersonalLevel() {
+  if (personalMovieDB.count < 10) {
+    console.log('More');
+  } else if (personalMovieDB.count > 10 && personalMovieDB.count < 30) {
+    console.log('Good');
+  } else if (personalMovieDB.count < 30) {
+    console.log('Expert');
+  } else {
+    console.log('Error');
+  }
 }
+detectPersonalLevel();
+
 console.log(personalMovieDB);
