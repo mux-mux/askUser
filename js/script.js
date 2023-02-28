@@ -13,7 +13,7 @@ for (let i = 0; i < 2; i++) {
   do {
     askFilm = prompt("Recently watched film?", "");
     askRate = prompt("How will you rate it?", "");
-  } while (askFilm.length < 50 || ((askFilm === null || askRate === null) || (askFilm === '' || askRate === ''));
+  } while (askFilm.length < 50 || ((askFilm === null || askRate === null) || (askFilm === '' || askRate === '')));
   personalMovieDB.movies[askFilm] = askRate;
 }
 
