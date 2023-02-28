@@ -1,4 +1,4 @@
-let askFilm, askRate, askGenre, numberOfFilms;
+let askFilm, askRate, numberOfFilms;
 
 const personalMovieDB = {
   count: numberOfFilms,
@@ -36,7 +36,7 @@ writeYourGenres();
 function rememberMyFilms() {
   for (let i = 0; i < 2; i++) {
     do {
-      askFilm = prompt("Recently watched film?", "");
+      askFilm = prompt("Recently watched film?", "").trim();
       askRate = prompt("How will you rate it?", "");
     } while (askFilm.length < 50 || ((askFilm === null || askRate === null) || (askFilm === '' || askRate === '')));
     personalMovieDB.movies[askFilm] = askRate;
