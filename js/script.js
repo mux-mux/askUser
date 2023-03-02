@@ -1,15 +1,16 @@
-let askFilm, askRate, askGenre, numberOfFilms;
-
 const personalMovieDB = {
-  count: numberOfFilms,
+  count: 0,
   movies: {},
   actors: {},
   genres: [],
   private: false,
   start: function () {
-    while (numberOfFilms === '' || numberOfFilms === null || isNaN(numberOfFilms)) {
-      numberOfFilms = +prompt("How many films did you watched already?", "");
+    while (personalMovieDB.count === '' || personalMovieDB.count === null || isNaN(personalMovieDB.count)) {
+      personalMovieDB.count = +prompt("How many films did you watched already?", "");
     }
+  },
+  toggleVisisbleMyDB: function () {
+    (personalMovieDB.private) ? personalMovieDB.private = false : personalMovieDB.private = true;
   },
   showMyDB: function (isPrivate) {
     if (!isPrivate) {
@@ -17,20 +18,24 @@ const personalMovieDB = {
     }
   },
   writeYourGenres: function () {
-    for (let i = 0; i < 3; i++) {
-      askGenre = +prompt(`What is your best genre number ${i + 1}?`, "");
+    for (let i = 1; i < 2; i++) {
+      let askGenre = prompt(`What is your best genres. Saparate them by comma`, "");
       if (askGenre === '' || askGenre === null) {
         i--;
       } else {
-        personalMovieDB.genres[i] = askGenre;
+        personalMovieDB.genres = askGenre.split(', ');
+        personalMovieDB.genres.sort();
       }
     }
+    personalMovieDB.genres.forEach((item, i) => {
+      console.log(`Genre #${i + 1} is - ${item}`);
+    });
   },
   rememberMyFilms: function () {
     for (let i = 0; i < 2; i++) {
       do {
-        askFilm = prompt("Recently watched film?", "").trim();
-        askRate = prompt("How will you rate it?", "");
+        const askFilm = prompt("Recently watched film?", "").trim(),
+          askRate = prompt("How will you rate it?", "");
       } while (askFilm.length < 50 || ((askFilm === null || askRate === null) || (askFilm === '' || askRate === '')));
       personalMovieDB.movies[askFilm] = askRate;
     }
@@ -46,22 +51,6 @@ const personalMovieDB = {
       console.log('Error');
     }
   },
-  toggleVisisbleMyDB: function (isPrivate) {
-    (!isPrivate) ? personalMovieDB.private = true : personalMovieDB.private = false;
-  }
 }
-
-
-
-personalMovieDB.start();
-personalMovieDB.showMyDB(personalMovieDB.private);
-personalMovieDB.toggleVisisbleMyDB(personalMovieDB.private);
-personalMovieDB.writeYourGenres();
-personalMovieDB.rememberMyFilms();
-personalMovieDB.detectPersonalLevel();
-
-personalMovieDB.genres.forEach((item, i) => {
-  console.log(`Genre #${i + 1} is - ${item}`);
-});
 
 console.log(personalMovieDB);
