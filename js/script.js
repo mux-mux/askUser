@@ -19,7 +19,7 @@ const personalMovieDB = {
   },
   writeYourGenres: function () {
     for (let i = 1; i < 2; i++) {
-      let askGenre = prompt(`What is your best genres. Saparate them by comma`, "");
+      let askGenre = prompt(`What is your best genres. Saparate them by comma`, "").toLowerCase();
       if (askGenre === '' || askGenre === null) {
         i--;
       } else {
