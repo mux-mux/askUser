@@ -32,9 +32,10 @@ const personalMovieDB = {
     });
   },
   rememberMyFilms: function () {
+    let askFilm, askRate;
     for (let i = 0; i < 2; i++) {
       do {
-        const askFilm = prompt("Recently watched film?", "").trim(),
+        askFilm = prompt("Recently watched film?", "").trim(),
           askRate = prompt("How will you rate it?", "");
       } while (askFilm.length < 50 || ((askFilm === null || askRate === null) || (askFilm === '' || askRate === '')));
       personalMovieDB.movies[askFilm] = askRate;
